@@ -1,0 +1,111 @@
+{
+    "values": {
+        "inputs": {
+            "ras": {
+                "values": {
+                    "pos": {
+                        "values": {
+                            "y": 31.800000000000004, 
+                            "x": 318.79999999999995
+                        }, 
+                        "class": "point"
+                    }, 
+                    "param": {
+                        "values": {
+                            "isAdvanced": false, 
+                            "name": "ras", 
+                            "showSublayersDialog": true, 
+                            "default": null, 
+                            "value": null, 
+                            "exported": null, 
+                            "hidden": false, 
+                            "optional": false, 
+                            "description": "ras"
+                        }, 
+                        "class": "processing.core.parameters.ParameterRaster"
+                    }
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.ModelerParameter"
+            }
+        }, 
+        "helpContent": {}, 
+        "group": "Classification", 
+        "name": "Finish Classification (Sieve 10-8 + NODATA)", 
+        "algs": {
+            "MODELERASSIGN UNWANTED TO NODATA_1": {
+                "values": {
+                    "name": "MODELERASSIGN UNWANTED TO NODATA_1", 
+                    "paramsFolded": true, 
+                    "outputs": {
+                        "OUTPUT_ALGGDALOGRTRANSLATE_1": {
+                            "values": {
+                                "description": "Last classif", 
+                                "pos": {
+                                    "values": {
+                                        "y": 422.0, 
+                                        "x": 611.0
+                                    }, 
+                                    "class": "point"
+                                }
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ModelerOutput"
+                        }
+                    }, 
+                    "pos": {
+                        "values": {
+                            "y": 377.0, 
+                            "x": 411.0
+                        }, 
+                        "class": "point"
+                    }, 
+                    "outputsFolded": true, 
+                    "dependencies": [], 
+                    "params": {
+                        "raster": {
+                            "values": {
+                                "alg": "GDALOGRSIEVE_1", 
+                                "output": "OUTPUT"
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
+                        }
+                    }, 
+                    "active": true, 
+                    "consoleName": "modeler:assign unwanted to nodata", 
+                    "description": "Assign unwanted to NODATA"
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
+            }, 
+            "GDALOGRSIEVE_1": {
+                "values": {
+                    "name": "GDALOGRSIEVE_1", 
+                    "paramsFolded": true, 
+                    "outputs": {}, 
+                    "outputsFolded": true, 
+                    "pos": {
+                        "values": {
+                            "y": 157.0, 
+                            "x": 220.0
+                        }, 
+                        "class": "point"
+                    }, 
+                    "dependencies": [], 
+                    "params": {
+                        "THRESHOLD": 10.0, 
+                        "INPUT": {
+                            "values": {
+                                "name": "ras"
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromInput"
+                        }, 
+                        "CONNECTIONS": 1
+                    }, 
+                    "active": true, 
+                    "consoleName": "gdalogr:sieve", 
+                    "description": "Sieve"
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
+            }
+        }
+    }, 
+    "class": "processing.modeler.ModelerAlgorithm.ModelerAlgorithm"
+}

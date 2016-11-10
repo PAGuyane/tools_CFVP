@@ -1,0 +1,201 @@
+{
+    "values": {
+        "inputs": {
+            "mntcrop": {
+                "values": {
+                    "pos": {
+                        "values": {
+                            "y": 118.0, 
+                            "x": 402.0
+                        }, 
+                        "class": "point"
+                    }, 
+                    "param": {
+                        "values": {
+                            "isAdvanced": false, 
+                            "name": "mntcrop", 
+                            "showSublayersDialog": true, 
+                            "default": null, 
+                            "value": null, 
+                            "exported": null, 
+                            "hidden": false, 
+                            "optional": false, 
+                            "description": "dtm_cropped"
+                        }, 
+                        "class": "processing.core.parameters.ParameterRaster"
+                    }
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.ModelerParameter"
+            }, 
+            "spot": {
+                "values": {
+                    "pos": {
+                        "values": {
+                            "y": 124.0, 
+                            "x": 129.0
+                        }, 
+                        "class": "point"
+                    }, 
+                    "param": {
+                        "values": {
+                            "isAdvanced": false, 
+                            "name": "spot", 
+                            "showSublayersDialog": true, 
+                            "default": null, 
+                            "value": null, 
+                            "exported": null, 
+                            "hidden": false, 
+                            "optional": false, 
+                            "description": "spot"
+                        }, 
+                        "class": "processing.core.parameters.ParameterRaster"
+                    }
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.ModelerParameter"
+            }
+        }, 
+        "helpContent": {}, 
+        "group": "Classification", 
+        "name": "addDTMtoImage", 
+        "algs": {
+            "OTBIMAGESCONCATENATION_1": {
+                "values": {
+                    "name": "OTBIMAGESCONCATENATION_1", 
+                    "paramsFolded": true, 
+                    "outputs": {}, 
+                    "pos": {
+                        "values": {
+                            "y": 365.0, 
+                            "x": 397.0
+                        }, 
+                        "class": "point"
+                    }, 
+                    "outputsFolded": true, 
+                    "dependencies": [], 
+                    "params": {
+                        "-ram": 128.0, 
+                        "-il": [
+                            {
+                                "values": {
+                                    "name": "spot"
+                                }, 
+                                "class": "processing.modeler.ModelerAlgorithm.ValueFromInput"
+                            }, 
+                            {
+                                "values": {
+                                    "alg": "OTBSUPERIMPOSESENSOR_1", 
+                                    "output": "-out"
+                                }, 
+                                "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
+                            }
+                        ]
+                    }, 
+                    "active": true, 
+                    "consoleName": "otb:imagesconcatenation", 
+                    "description": "Images Concatenation"
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
+            }, 
+            "OTBSUPERIMPOSESENSOR_1": {
+                "values": {
+                    "name": "OTBSUPERIMPOSESENSOR_1", 
+                    "paramsFolded": true, 
+                    "outputs": {}, 
+                    "pos": {
+                        "values": {
+                            "y": 236.0, 
+                            "x": 408.0
+                        }, 
+                        "class": "point"
+                    }, 
+                    "outputsFolded": true, 
+                    "dependencies": [], 
+                    "params": {
+                        "-interpolator": 1, 
+                        "-inm": {
+                            "values": {
+                                "name": "mntcrop"
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromInput"
+                        }, 
+                        "-ram": 128.0, 
+                        "-interpolator.bco.radius": 2.0, 
+                        "-lms": 4.0, 
+                        "-inr": {
+                            "values": {
+                                "name": "spot"
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromInput"
+                        }, 
+                        "-elev.default": 0.0, 
+                        "-mode": 0
+                    }, 
+                    "active": true, 
+                    "consoleName": "otb:superimposesensor", 
+                    "description": "Superimpose sensor"
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
+            }, 
+            "GDALOGRTRANSLATE_1": {
+                "values": {
+                    "name": "GDALOGRTRANSLATE_1", 
+                    "paramsFolded": true, 
+                    "outputs": {
+                        "OUTPUT": {
+                            "values": {
+                                "description": "outRaster", 
+                                "pos": {
+                                    "values": {
+                                        "y": 478.0, 
+                                        "x": 493.0
+                                    }, 
+                                    "class": "point"
+                                }
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ModelerOutput"
+                        }
+                    }, 
+                    "pos": {
+                        "values": {
+                            "y": 433.0, 
+                            "x": 293.0
+                        }, 
+                        "class": "point"
+                    }, 
+                    "outputsFolded": true, 
+                    "dependencies": [], 
+                    "params": {
+                        "ZLEVEL": 6.0, 
+                        "PROJWIN": null, 
+                        "RTYPE": 1, 
+                        "BIGTIFF": 1, 
+                        "OUTSIZE_PERC": true, 
+                        "SDS": false, 
+                        "COMPRESS": 0, 
+                        "OUTSIZE": 100.0, 
+                        "NO_DATA": null, 
+                        "SRS": "", 
+                        "TILED": false, 
+                        "JPEGCOMPRESSION": 75.0, 
+                        "INPUT": {
+                            "values": {
+                                "alg": "OTBIMAGESCONCATENATION_1", 
+                                "output": "-out"
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
+                        }, 
+                        "TFW": false, 
+                        "PREDICTOR": 1.0, 
+                        "EXPAND": 0, 
+                        "EXTRA": null
+                    }, 
+                    "active": true, 
+                    "consoleName": "gdalogr:translate", 
+                    "description": "Translate (convert format)"
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
+            }
+        }
+    }, 
+    "class": "processing.modeler.ModelerAlgorithm.ModelerAlgorithm"
+}
